@@ -1,0 +1,11 @@
+Style FvwmPager Sticky, StaysOnBottom, !Title, !Handles, Borders
+Style FvwmPager WindowListSkip, CirculateSkip, !Iconifiable
+Style FvwmPager FixedPPosition, FixedSize
+Style FvwmPager ParentalRelativity
+*FvwmPager: UseSkipList
+*FvwmPager: Colorset * 12
+*FvwmPager: HilightColorset * 2
+*FvwmPager: Font none
+*FvwmPager: SolidSeparators
+
+*DockBar: (150x1, ActiveColorset 10, padding 4 4, swallow FvwmPager "Module FvwmPager")

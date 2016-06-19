@@ -1,0 +1,17 @@
+# Ctrl --> C
+# Alt --> M
+# Win --> 4
+
+Key 1   A   4   GotoPage 0 0
+Key 2   A   4   GotoPage 1 0
+Key 3   A   4   GotoPage 2 0
+Key 4   A   4   GotoPage 3 0
+
+Key d   A   4   All (!Iconic) Function Thumbnail
+Key q   A   4   Close
+Key r   A   4   Restart
+Key t   A   4   Exec $[TERM]
+Key n   A   4   Exec surf 'http://www.baidu.com'
+
+Key F2  A   4   Exec scrot -d 3 '%Y%m%d%H%M%S_$[vp.width]x$h.png' -e 'mkdir -p ~/screenshots;mv $f ~/screenshots'
+Key F4  A   N   Exec xterm

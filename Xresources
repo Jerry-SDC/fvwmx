@@ -1,0 +1,44 @@
+xterm*faceName:fira Mono Medium:size=9
+xterm*faceNameDoublesize:Source Han Sans CN Medium:size=10
+xterm*color0:#000000
+xterm*color1:#CC0000
+xterm*color2:#4E9A06
+xterm*color3:#C4A000
+xterm*color4:#3465A4
+xterm*color5:#75507B
+xterm*color6:#06989A
+xterm*color7:#D3D7CF
+xterm*color8:#555753
+xterm*color9:#EF2929
+xterm*color10:#8AE234
+xterm*color11:#FCE94F
+xterm*color12:#739FCF
+xterm*color13:#AD7FA8
+xterm*color14:#34E2E2
+xterm*color15:#EEEEEC
+
+Rxvt.font:xft:Fira Mono Medium:size=9,xft:Source Han Sans CN Medium:size=10
+!Rxvt.fading:80
+Rxvt.scrollBar:False
+Rxvt.transparent:True
+Rxvt.shading:20
+Rxvt.letterSpace:-1
+Rxvt.foreground:snow
+Rxvt.color0:#000000
+Rxvt.color1:#CC0000
+Rxvt.color2:#4E9A06
+Rxvt.color3:#C4A000
+Rxvt.color4:#3465A4
+Rxvt.color5:#75507B
+Rxvt.color6:#06989A
+Rxvt.color7:#D3D7CF
+Rxvt.color8:#555753
+Rxvt.color9:#EF2929
+Rxvt.color10:#8AE234
+Rxvt.color11:#FCE94F
+Rxvt.color12:#739FCF
+Rxvt.color13:#AD7FA8
+Rxvt.color14:#34E2E2
+Rxvt.color15:#EEEEEC
+
+Xft.dpi:96

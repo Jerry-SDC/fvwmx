@@ -1,0 +1,40 @@
+#!/usr/bin/env python2
+
+import os
+import json
+
+chrome_bookmark = os.getenv("HOME") + "/.config/chromium/Default/Bookmarks"
+
+f = open(chrome_bookmark, "r")
+j = json.load(f)
+f.close()
+
+root = j.get("roots")
+
+def print_node(menu, node):
+    if type(node) is unicode:
+        return
+    node_type = node.get('type')
+    if node_type and node_type == "folder":
+        name = node.get('name').encode('utf8')
+        quote_name = "\"" + name + "\""
+        print "AddToMenu " + "\"" + menu.encode('utf8') + "\" \n+ " + quote_name + "\t Popup " + quote_name
+        print "DestroyMenu " + quote_name
+        print "AddToMenu " + quote_name
+    for m in node['children']:
+        t = m.get('type')
+        if t is None:
+            return
+        if t == "folder":
+            print_node(node['name'], m)
+        elif t == "url":
+            name = m.get('name').encode('utf8')
+            print "AddToMenu \"" + node['name'].encode('utf8') + "\" \n+ \'" + name + "\'\t Exec chromium " + m.get('url').encode('utf8')
+
+print """ + "Bookmarks" Popup MenuBookmarks """
+#print """ + "" Nop """
+
+print """DestroyMenu MenuBookmarks"""
+print """AddToMenu MenuBookmarks"""
+for item in root.items():
+    print_node("MenuBookmarks", item[1])

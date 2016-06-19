@@ -1,0 +1,56 @@
+Emulate Win
+DesktopSize 4x1
+EdgeScroll  0 0
+EdgeThickness 0
+
+OpaqueMoveSize unlimited
+
+# hilight title bar font color
+#HilightColor black
+
+Style * TileCascadePlacement
+Style * HandleWidth 1
+Style * RoundedCornersTop
+Style * ResizeOpaque
+Style * ClickToFocus
+Style * MouseFocusClickRaises
+#Style * PositionPlacement Center
+
+Style * BorderColorset 7
+Style * HilightBorderColorset 7
+
+# Icon Box settings
+#Style * NoIcon
+Style * IconBox -150 40 -1 -1, IconFill right right, IconGrid 140 50
+Style * IconTitleColorset 9
+Style * HilightIconTitleColorset 9
+Style * IconTitleRelief 0
+Style * IconBackgroundRelief 0
+
+Style "Cloud Music"  !Title,!Borders
+Style "netease-cloud-music"  !Title
+
+#Style plank !Title, !Borders
+#Style plank HandleWidth 0
+#Style tint2 !Title
+#Style tint2 !RoundedCorners
+#Style tint2 HandleWidth 0
+#Style chromium !Title
+#Style *xvt TitleAtLeft
+#Style Conky !RoundedCorners
+
+DestroyFunc DesktopClick
+AddToFunc DesktopClick
++ I All (FvwmPanel*) Close
+
+Mouse 3   R N Menu MenuFvwmRoot Nop
+Mouse 1   R N Function DesktopClick
+Mouse 1   W M Move
+
+DestroyFunc WindowFocusChange
+AddToFunc WindowFocusChange
++ I Nop
++ I All (FvwmPanel*, !Focused) Close
+
+*FvwmEvent:Cmd Function
+*FvwmEvent: focus_change WindowFocusChange

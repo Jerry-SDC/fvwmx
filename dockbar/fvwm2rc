@@ -1,0 +1,124 @@
+Style DockBar Sticky, !Title, !Handles, Borders, FixedPPosition, FixedSize
+Style DockBar WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,
+Style DockBar ParentalRelativity
+#Style DockBar StaysOnTop
+
+DestroyFunc ToggleDockApp
+AddToFunc ToggleDockApp
++ I None ('$0', CurrentPage) Exec exec $*
++ I TestRc (Match) Break
++ I Next ('$0', CurrentPage, Focused, Raised) Thumbnail
++ I TestRc (NoMatch) Next ('$0', CurrentPage, CirculateHit) DeThumbnail
+
+DestroyFunc ShowDockAppMenu
+AddToFunc ShowDockAppMenu
++ I DestroyMenu DockAppMenu
++ I AddToMenu DockAppMenu %actions/16/add.png%"打开新窗口 ..." Exec $[2-]
+#+ I Test (f $[FVWM_SCRIPTS]/app/$2) AddToMenu DockAppMenu "" Nop
+#+ I TestRc (Match) PipeRead "$[FVWM_SCRIPTS]/app/$2"
++ I Next ($2, CurrentPage) AddToMenu DockAppMenu "" Nop
++ I TestRc (Match) All ($2, CurrentPage) \
+        PipeRead "echo AddToMenu DockAppMenu %apps/16/$$2.png%\"$[w.name]\" WindowId $[w.id] DeThumbnail"
++ I Popup DockAppMenu Root $0 $1 Nop
+
+DestroyFunc ShowDockFolder
+AddToFunc ShowDockFolder
++ I Next ($0, pcmanfm, CurrentPage)
++ I Exec pcmanfm $*
+
+AddToFunc FuncFvwmMenuDirectory
++ I PipeRead "fvwm-menu-directory -d '$0' --icon-title 'apps/24/file-manager.png' --icon-dir 'places/24/folder.png' --icon-file 'mimetypes/24/text-plain.png' --exec-file 'xdg-open'"
+
+DestroyFunc ShowDockFolderMenu
+AddToFunc ShowDockFolderMenu
++ I FuncFvwmMenuDirectory '$2'
++ I Popup '$2' Root $0 $1 Nop
+
+DestroyFunc DockBarCreateAppItem
+AddToFunc DockBarCreateAppItem
++ I Test (I $1.png) \
+        *DockBar: (40x1, Icon $1.png, PressIcon $1.png, \
+                   Action (Mouse 1) Exec $0,\
+                   Action (Mouse 3) ShowDockAppMenu $leftp $topp-100m $0)
++ I TestRc (NoMatch) Test (I $1.svg) \
+        *DockBar: (40x1, Icon $1.svg:32x32, PressIcon $1.svg:16x16, \
+                   Action (Mouse 1) Exec $0,\
+                   Action (Mouse 3) ShowDockAppMenu $leftp $topp-100m $0)
++ I TestRc (NoMatch) Test (I apps/scalable/$1.svg) \
+        *DockBar: (40x1, Icon apps/scalable/$1.svg:32x32, PressIcon apps/scalable/$1.svg:16x16, \
+                   Action (Mouse 1) Exec $0,\
+                   Action (Mouse 3) ShowDockAppMenu $leftp $topp-100m $0)
+
+DestroyFunc ShowFvwmPanelDir
+AddToFunc ShowFvwmPanelDir
++ I DestroyModuleConfig FvwmPanelDir:*
++ I PipeRead "$[FVWM_SCRIPTS]/mkdirpanel.py $*"
++ I Module FvwmButtons -transient FvwmPanelDir
+
+DestroyFunc ToggleFvwmPanelDir
+AddToFunc ToggleFvwmPanelDir
++ I All (FvwmPanelDir) Close
++ I TestRc (NoMatch) Function ShowFvwmPanelDir $*
+
+DestroyFunc CreateFolderDock
+AddToFunc CreateFolderDock
++ I Exec mkdir -p "$1"
++ I *DockBar: (40x1, Icon places/32/$0.png, PressIcon places/16/$0.png, \
+               Action (Mouse 1) ToggleFvwmPanelDir "$1" $left $top)
+
+#
+# Fvwm Application Panel
+#
+DestroyFunc ShowFvwmPanelApp
+AddToFunc ShowFvwmPanelApp
++ I DestroyModuleConfig FvwmPanelApp:*
++ I PipeRead "$[FVWM_SCRIPTS]/mkapppanel.py $*"
++ I Module FvwmButtons -transient FvwmPanelApp
+
+DestroyFunc ToggleFvwmPanelApp
+AddToFunc ToggleFvwmPanelApp
++ I All (FvwmPanelApp) Close
++ I TestRc (NoMatch) Function ShowFvwmPanelApp $*
+
+DestroyFunc DockBarCreateAppPanel
+AddToFunc DockBarCreateAppPanel
++ I *DockBar: (40x1, Icon places/32/$0.png, PressIcon places/16/$0.png, \
+               Action (Mouse 1) ToggleFvwmPanelApp "$1" $left $top)
+
+#
+# Create DockBar
+#
+DestroyFunc InitDockBar
+AddToFunc InitDockBar
++ I *DockBar: ButtonGeometry 1x38
++ I *DockBar: BoxSize smart
++ I *DockBar: Frame 0
++ I *DockBar: Rows 1
++ I *DockBar: Padding 0 0
++ I *DockBar: Font "$[DEFFONT]"
++ I *DockBar: Colorset 10
++ I *DockBar: ActiveColorset 2
++ I *DockBar: PressColorset 2
++ I Function DockBarCreateAppPanel start-here /usr/share/applications
++ I Function DockBarCreateAppItem surf browser
++ I Function DockBarCreateAppItem firefox firefox
++ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'https://onedrive.live.com'" onedrive
++ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://twitter.com'" twitter
++ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://mail.google.com'" gmail
++ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://calendar.google.com'" gnome-calendar
++ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://drive.google.com'" google_driver
++ I Function DockBarCreateAppItem leafpad leafpad
++ I Function DockBarCreateAppItem virtualbox virtualbox
++ I Function DockBarCreateAppItem chromium chrome
++ I Function DockBarCreateAppItem "$[TERM]" xterm
++ I Function CreateFolderDock folder-home $[HOME]
++ I Function CreateFolderDock folder-download $[HOME]/downloads
++ I Read $[FVWM_USERDIR]/dockbar/pager/fvwm2rc
+
+DestroyFunc StartDocBar
+AddToFunc StartDocBar
++ I ModuleSynchronous FvwmButtons DockBar
++ I Schedule 10 All (DockBar) Move 50-50w 100-100w
+
+InitDockBar
+StartDocBar

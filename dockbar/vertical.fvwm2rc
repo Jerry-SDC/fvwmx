@@ -1,0 +1,80 @@
+Style DockBar Sticky, !Title, !Handles, Borders, FixedPPosition, FixedSize
+Style DockBar WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,
+Style DockBar ParentalRelativity
+#Style DockBar StaysOnTop
+
+DestroyFunc ToggleDockApp
+AddToFunc ToggleDockApp
++ I None ($0, CurrentPage) Exec exec $*
++ I TestRc (Match) Break
++ I Next ($0, CurrentPage, Focused, Raised) Thumbnail
++ I TestRc (NoMatch) Next ($0, CurrentPage, CirculateHit) DeThumbnail
+
+DestroyFunc ShowDockAppMenu
+AddToFunc ShowDockAppMenu
++ I DestroyMenu DockAppMenu
++ I AddToMenu DockAppMenu %actions/16/add.png%"Open new window ..." Exec $[2-]
++ I Test (f $[SCRIPTS_DIR]/app/$2) AddToMenu DockAppMenu "" Nop
++ I TestRc (Match) PipeRead "$[SCRIPTS_DIR]/app/$2"
++ I Next ($2, CurrentPage) AddToMenu DockAppMenu "" Nop
++ I TestRc (Match) All ($2, CurrentPage) \
+        PipeRead "echo AddToMenu DockAppMenu %apps/16/$$2.png%\"$[w.name]\" WindowId $[w.id] DeThumbnail"
++ I Popup  DockAppMenu Root $0 $1 Nop
+
+DestroyFunc ShowDockFolder
+AddToFunc ShowDockFolder
++ I Next ($0, pcmanfm, CurrentPage)
++ I Exec pcmanfm $*
+
+DestroyFunc CreateAppDock
+AddToFunc CreateAppDock
++ I Test (I 32x32/apps/$1.png) *DockBar: (2x1, Icon 32x32/apps/$1.png, \
+                           PressIcon 16x16/apps/$1.png, \
+                           Action (Mouse 1) ToggleDockApp $0,\
+                           Action (Mouse 3) ShowDockAppMenu $leftp $topp-100m $0)
++ I TestRc (NoMatch) *DockBar: (2x1, Icon 32x32/apps/$0.png, \
+               PressIcon 16x16/apps/$0.png, \
+               Action (Mouse 1) ToggleDockApp $0,\
+               Action (Mouse 3) ShowDockAppMenu $leftp $topp-100m $0)
+
+DestroyFunc CreateFolderDock
+AddToFunc CreateFolderDock
++ I *DockBar: (2x1, Icon 32x32/places/$0.svg:32x32, \
+		PressIcon 16x16/places/$0.svg:16x16, \
+		Action (Mouse 1) ShowDockFolder $1)
+
+DestroyFunc InitDockBar
+AddToFunc InitDockBar
++ I *DockBar: ButtonGeometry 18x36
++ I *DockBar: BoxSize smart
++ I *DockBar: Frame 0
++ I *DockBar: Rows 11
++ I *DockBar: Padding 0 0
++ I *DockBar: Font "$[DEFFONT]"
++ I *DockBar: Colorset 11
++ I *DockBar: ActiveColorset 2
++ I *DockBar: PressColorset 2
++ I Function CreateAppDock $[TERM] xterm
++ I Function CreateAppDock chromium
++ I Function CreateAppDock mousepad gedit
++ I Function CreateAppDock pcmanfm system-file-manager
++ I Function CreateAppDock opera
++ I Function CreateAppDock libreoffice libreoffice-writer
++ I Function CreateAppDock idea.sh idea
++ I Function CreateAppDock remmina
++ I Function CreateAppDock wireshark
++ I Function CreateAppDock dia
++ I Function CreateAppDock "pcmanfm menu://applications" app-launcher
+#+ I Function CreateFolderDock user-trash $[HOME]/.Trash
+#+ I Read $[FVWM_USERDIR]/dockbar/network/fvwm2rc
+#+ I Read $[FVWM_USERDIR]/dockbar/timer/fvwm2rc
+#+ I Read $[FVWM_USERDIR]/dockbar/pager/fvwm2rc
+
+DestroyFunc StartDocBar
+AddToFunc StartDocBar
++ I ModuleSynchronous FvwmButtons DockBar
+#+ I Schedule 10 All (DockBar) Move 100-100w 100-100w
++ I Schedule 10 All (DockBar) Move 0 50-50w
+
+InitDockBar
+StartDocBar

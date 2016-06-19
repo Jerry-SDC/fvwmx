@@ -1,0 +1,90 @@
+*FvwmIdent: Colorset 5
+*FvwmIdent: Font "xft:Fira Mono:size=9"
+
+DestroyDecor SimpleDecor
+AddToDecor   SimpleDecor
++ TitleStyle LeftJustified Height 23
++ TitleStyle Active colorset 5 -- flat
++ TitleStyle InActive colorset 6 -- flat
++ ButtonStyle 2 ActiveUp   Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
++ ButtonStyle 2 ActiveDown Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
++ ButtonStyle 2 Inactive   Vector 4 30x30@3 60x60@3 60x30@4 30x60@3 -- Flat
++ ButtonStyle 4 ActiveUp   Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
++ ButtonStyle 4 ActiveDown Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
++ ButtonStyle 4 Inactive   Vector 7 30x30@3 30x60@3 60x60@3 60x30@3 30x30@3 30x35@3 60x35@3 -- Flat
++ ButtonStyle 6 ActiveUp   Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
++ ButtonStyle 6 ActiveDown Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
++ ButtonStyle 6 Inactive   Vector 5 30x60@3 60x60@3 60x50@3 30x50@3 30x60@3 -- Flat
++ BorderStyle Simple -- NoInset Flat
++ ButtonStyle All -- UseTitleStyle
+
+DestroyDecor MacDecor
+AddToDecor   MacDecor
++ TitleStyle LeftJustified Height 23
++ TitleStyle Active colorset 5 -- flat
++ TitleStyle InActive colorset 6 -- flat
++ ButtonStyle 1 ActiveUp   (Pixmap winmenu.png -- Flat)
++ ButtonStyle 1 ActiveDown (Pixmap winmenu.png -- Flat)
++ ButtonStyle 1 Inactive   (Pixmap inactive.png -- Flat)
++ ButtonStyle 2 ActiveUp   (Pixmap close.png -- Flat)
++ ButtonStyle 2 ActiveDown (Pixmap close.png -- Flat)
++ ButtonStyle 2 Inactive   (Pixmap inactive.png -- Flat)
++ ButtonStyle 4 ActiveUp   (Pixmap maximize.png -- Flat)
++ ButtonStyle 4 ActiveDown (Pixmap maximize.png -- Flat)
++ ButtonStyle 4 Inactive   (Pixmap inactive.png -- Flat)
++ ButtonStyle 6 ActiveUp   (Pixmap minimize.png -- Flat)
++ ButtonStyle 6 ActiveDown (Pixmap minimize.png -- Flat)
++ ButtonStyle 6 Inactive   (Pixmap inactive.png -- Flat)
+#+ BorderStyle Simple -- NoInset Flat
++ ButtonStyle All -- UseTitleStyle
+
+DestroyMenu MenuFvwmWindowOps
+AddToMenu MenuFvwmWindowOps
++ "窗口信息" Pick Module FvwmIdent
++ "" Nop
++ "关闭窗口" Pick Close
+
+DestroyFunc MaximizeToNew
+AddToFunc MaximizeToNew
++ I ThisWindow (Maximized) Break
++ I Piperead "echo DesktopSize $(($[desk.pagesx]+1))x1"
++ I Piperead "echo MoveToPage $(($[desk.pagesx]-1)) 0"
++ I Piperead "echo GoToPage $(($[desk.pagesx]-1)) 0"
++ I ThisWindow Maximize 100 100
+
+DestroyFunc MaximizeOrMove
+AddToFunc MaximizeOrMove
++ I Raise
++ D Maximize
++ M Move
+
+DestroyFunc Thumbnail
+AddToFunc Thumbnail
++ I Raise
+#+ I ThisWindow (!Shaded,Iconifiable,!Iconic) PipeRead 'import -frame -window $[w.id] png:/tmp/$[w.id] -resize 128 -quality 0 && echo Nop'
++ I ThisWindow (!Shaded,Iconifiable,!Iconic) PipeRead 'xwd -silent -id $[w.id] | convert - -resize 128x64! png:/tmp/$[w.id] && echo Nop'
++ I WindowStyle IconOverride, Icon /tmp/$[w.id]
++ I Iconify
++ I All (Iconic) PlaceAgain Icon
+
+DestroyFunc DeThumbnail
+AddToFunc DeThumbnail
++ I Iconify off
++ I Exec rm -f /tmp/$[w.id]
++ I All (Iconic) PlaceAgain Icon
++ I Raise
++ I FlipFocus
+
+Mouse 1 1 A Menu MenuFvwmWindowOps Nop
+Mouse 1 2 A Close
+Mouse 1 4 A Maximize 100 100
+Mouse 1 6 A Function Thumbnail
+Mouse 1 I A Function DeThumbnail
+Mouse 3 I A Close
+
+Mouse 3 T A Menu MenuFvwmWindowOps Nop
+Mouse 4 T A WindowShade true North
+Mouse 5 T A WindowShade false South
+Mouse 1 T N MaximizeOrMove
+
+Style * UseDecor MacDecor

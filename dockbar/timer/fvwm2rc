@@ -1,0 +1,2 @@
+*DockBar: (3x1, id timer, Action Menu DateStatusMenu root $leftp $topp-100m Nop)
+Schedule Periodic 1000 Exec $[FVWM_USERDIR]/dockbar/timer/update_time.sh

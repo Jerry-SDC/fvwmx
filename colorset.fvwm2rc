@@ -1,0 +1,34 @@
+# Default Colorset
+#Colorset 0 fg black, hi black, sh black, bg white
+# Inactive items
+Colorset 1 RootTransparent, fg black, hi #343434, sh #343434, bg #9cb2ee, Tint white 90
+# Active items
+Colorset 2 RootTransparent, fg black, hi #343434, sh #343434, bg #9cb2ee, Tint #9cb2ee 90
+# Menu
+Colorset 3 RootTransparent, fg black, hi #777777, sh #777777, Tint white 80
+Colorset 4 RootTransparent, fg black, hi #777777, sh #777777, Tint #9cb2ee 90
+
+# Active TitleBar
+#Colorset 5 fg black, bg #D6D6D6
+Colorset 5 fg black, bg #E7E8EB
+#Colorset 5 fg black, bg #EFF0F1
+# InActive TitleBar
+Colorset 6 fg black, hi black, bg #E7E8EB
+#Colorset 6 fg black, hi black, bg #EFF0F1
+
+# Windows Borders
+Colorset 7 fg #343434, bg #777777
+
+# DirPanel
+Colorset 8 RootTransparent, fg black, bg #FAFAFA, Tint white 60
+# AppPanel
+Colorset 9 RootTransparent, fg black, bg #FAFAFA, Tint white 90
+
+# Taskbar: FvwmIconMan, DockStatus
+Colorset 10 RootTransparent, fg black, hi #343434, sh #343434, Tint white 75
+# App Launcher
+Colorset 11 RootTransparent, fg black, hi #343434, sh #343434, Tint black 30
+# FvwmPages
+Colorset 12 RootTransparent, fg white, hi #343434, sh #343434, Tint white 50
+# Conky
+Colorset 13 RootTransparent, fg black

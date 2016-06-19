@@ -1,0 +1,29 @@
+DestroyFunc CreateMenuWiFiList
+AddToFunc CreateMenuWiFiList
++ I AddToMenu $0 "" Nop
++ I AddToMenu $0 %status/16/nm-signal-100.png%"WLAN-BEF510-2.4G" Nop
++ I AddToMenu $0 %status/16/nm-signal-100.png%"WLAN-BEF510-5G" Nop
+
+DestroyFunc CreateMenuNetworkIf
+AddToFunc CreateMenuNetworkIf
++ I PipeRead "$[FVWM_USERDIR]/dockbar/network/netif_menu.py $0"
+
+DestroyFunc CreateMenuNetworkStatus
+AddToFunc CreateMenuNetworkStatus
++ I DestroyMenu MenuNetworkStatus
++ I AddToMenu MenuNetworkStatus
+#+ I AddToMenu MenuNetworkStatus DynamicPopUpAction Exec "$[SCRIPTS_DIR]/scan_wifi.py"
+#+ I AddToMenu MenuNetworkStatus %apps/16/preferences-system-network.png%"Open Network Manager" Nop
+#+ I AddToMenu MenuNetworkStatus "" Nop
+#+ I AddToMenu MenuNetworkStatus %status/16/nm-signal-100.png%"Enable Wireless Network" Nop
++ I Function CreateMenuNetworkIf MenuNetworkStatus
+#+ I Function CreateMenuWiFiList MenuNetworkStatus
++ I AddToMenu MenuNetworkStatus "" Nop
++ I AddToMenu MenuNetworkStatus %actions/16/add.png%"Add new network connection ..." Nop
+
+DestroyFunc PopupNetworkStatusMenu
+AddToFunc PopupNetworkStatusMenu
++ I Function CreateMenuNetworkStatus
++ I Menu MenuNetworkStatus $*
+
+*DockBar: (2x1, Icon status/22/nm-device-wired.png,  Action PopupNetworkStatusMenu root $leftp $topp-100m Nop)

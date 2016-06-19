@@ -1,0 +1,59 @@
+MenuStyle * BorderWidth 1
+MenuStyle * Animation
+MenuStyle * TrianglesSolid
+MenuStyle * SeparatorsLong
+MenuStyle * MenuColorset 3, ActiveColorset 4
+MenuStyle * PopupOffset 0 100
+MenuStyle * !PopupImmediately
+MenuStyle * PopupDelay 500
+MenuStyle * PopupActiveArea
+MenuStyle * VerticalItemSpacing 5 5
+MenuStyle * HilightBack
+MenuStyle * Hilight3DOff
+MenuStyle * ItemFormat " %i  %l%    %>  "
+MenuStyle * FlatSeparators
+MenuStyle * Font "$[DEFFONT]"
+CopyMenuStyle * AppMenuStyle
+
+DestroyFunc MakeBackgroundMenu
+AddToFunc MakeBackgroundMenu
++ I DestroyMenu recreate MenuBackground
++ I AddToMenu MenuBackground
++ I    PipeRead '$[FVWM_USERDIR]/menus/build_bgmenu.sh'
++ I CopyMenuStyle * MenuBackgroundStyle
++ I MenuStyle MenuBackgroundStyle ItemFormat "%i %l%    %>  "
++ I ChangeMenuStyle MenuBackgroundStyle MenuBackground
+
+DestroyMenu recreate MenuFvwmRoot
+AddToMenu MenuFvwmRoot
++ DynamicPopDownAction DestroyMenu MenuBackground
++ MissingSubMenuFunction MakeBackgroundMenu
+#+ %apps/16/openterm.png%"Open FvwmConsole" FvwmConsole
++ %apps/16/openterm.png%"打开命令行终端" Exec $[TERM]
+#+ %16x16/apps/gnome-about-logo.png%"About AmyOS" Exec $[FVWM_SCRIPTS]/about_amyos.py
++ %actions/16/window-close.png%"强制退出应用程序" Exec xkill
++ "" Nop
++ %actions/16/mail-send-receive.png%"应用程序" Popup FvwmMenu Nop
++ %actions/16/mail-send-receive.png%"检查系统更新" Exec xterm -e "sudo pacman -Syu"
++ %apps/16/paprefs.png%"外观设置" Exec lxappearance
++ %apps/16/preferences-desktop-wallpaper.png%"切换桌面背景" Popup MenuBackground
++ "" Nop
++ %apps/16/gnome-log-out.png%"注销" Exec $[FVWM_SCRIPTS]/quit_verify.py
+
+DestroyMenu MenuLogout
+AddToMenu MenuLogout
++ "重启FVWM"%actions/22/system-log-out.png%   Restart
++ "注销"%actions/22/system-log-out.png%   Quit
++ "" Nop
++ "重启计算机"%actions/22/system-restart-panel.png%   Exec $[FVWM_SCRIPTS]/quit_verify.py
++ "关闭计算机"%actions/22/system-shutdown.png%   Exec $[FVWM_SCRIPTS]/quit_verify.py
+
+DestroyMenu MenuBattery
+AddToMenu MenuBattery
++ "Power Manager" Nop
+
+DestroyMenu DateStatusMenu
+AddToMenu DateStatusMenu
++ "Date and time sttings" Nop
+
+PipeRead 'XDG_MENU_PREFIX=gnome- fvwm-menu-desktop --menu-style AppMenuStyle'

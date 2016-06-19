@@ -1,0 +1,6 @@
+# locale settings
+SetEnv LC_ALL "zh_CN.utf-8"
+SetEnv XMODIFIERS "@im=fcitx"
+SetEnv GTK_IM_MODULE "fcitx"
+SetEnv GTK3_IM_MODULE "fcitx"
+SetEnv QT_IM_MODULE "fcitx"
