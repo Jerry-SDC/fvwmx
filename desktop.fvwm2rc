@@ -38,6 +38,7 @@ Style "netease-cloud-music"  !Title
 #Style chromium !Title
 #Style *xvt TitleAtLeft
 #Style Conky !RoundedCorners
+#
 
 DestroyFunc DesktopClick
 AddToFunc DesktopClick
@@ -45,7 +46,6 @@ AddToFunc DesktopClick
 
 Mouse 3   R N Menu MenuFvwmRoot Nop
 Mouse 1   R N Function DesktopClick
-Mouse 1   W M Move
 
 DestroyFunc WindowFocusChange
 AddToFunc WindowFocusChange

@@ -5,7 +5,7 @@ SetEnv FVWM_TMPDIR /tmp/fvwm/
 SetEnv FVWM_CACHE_DIR $[HOME]/.fvwm_cache/
 SetEnv FVWM_SCRIPTS $[FVWM_USERDIR]/scripts/
 SetEnv TERM xterm
-SetEnv FVWM_FONT_DEFAULT "xft:Source Han Sans CN:Medium:size=9"
+SetEnv FVWM_FONT_DEFAULT "xft:Source Han Sans CN Bold:size=9"
 SetEnv FVWM_FONT_BOLD "xft:Source Han Sans CN Bold:size=9.5"
 SetEnv FVWM_FONT_SMALL "xft:Source Han Sans CN:Bold:size=8.5"
 SetEnv FVWM_FONT_MENU "xft:Source Han Sans CN Normal:size=8.5"

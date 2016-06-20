@@ -1,5 +1,6 @@
 xterm*faceName:fira Mono Medium:size=9
 xterm*faceNameDoublesize:Source Han Sans CN Medium:size=10
+xterm*background:#E7E8EB
 xterm*color0:#000000
 xterm*color1:#CC0000
 xterm*color2:#4E9A06

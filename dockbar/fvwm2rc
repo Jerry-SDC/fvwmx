@@ -112,7 +112,7 @@ AddToFunc InitDockBar
 + I Function DockBarCreateAppItem chromium chrome
 + I Function DockBarCreateAppItem "$[TERM]" xterm
 + I Function CreateFolderDock folder-home $[HOME]
-+ I Function CreateFolderDock folder-download $[HOME]/downloads
++ I Function CreateFolderDock folder-download $[HOME]/Downloads
 + I Read $[FVWM_USERDIR]/dockbar/pager/fvwm2rc
 
 DestroyFunc StartDocBar

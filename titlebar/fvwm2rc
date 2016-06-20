@@ -86,5 +86,6 @@ Mouse 3 T A Menu MenuFvwmWindowOps Nop
 Mouse 4 T A WindowShade true North
 Mouse 5 T A WindowShade false South
 Mouse 1 T N MaximizeOrMove
+Mouse 1 W M MaximizeOrMove
 
 Style * UseDecor MacDecor

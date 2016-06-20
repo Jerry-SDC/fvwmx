@@ -4,9 +4,9 @@ import os
 import os.path
 import sys
 
-button_width = 128
-button_height = 156
-icon_size = 96
+button_width = 136
+button_height = 128
+icon_size = "84x84"
 
 panel_settings = """
 Style FvwmPanelDir !Title, !Handles, Borders, FixedPPosition, FixedSize
@@ -17,7 +17,7 @@ Style FvwmPanelDir RoundedCorners
 *FvwmPanelDir: BoxSize smart
 *FvwmPanelDir: Frame 0
 *FvwmPanelDir: Padding 5 8
-*FvwmPanelDir: Font "$[FVWM_FONT_BOLD]"
+*FvwmPanelDir: Font "$[FVWM_FONT_SMALL]"
 *FvwmPanelDir: Colorset 8
 *FvwmPanelDir: ActiveColorset 2
 *FvwmPanelDir: PressColorset 2
@@ -26,7 +26,7 @@ Style FvwmPanelDir RoundedCorners
 def calculate_size(objs):
     rows = 1
     l = len(objs) + 1
-    for i in range(1, 6, 1):
+    for i in range(1, 5, 1):
         rows = i
         if (rows+1) ** 2 > l:
             break
@@ -44,6 +44,9 @@ def make_file_obj(p, x, y):
     }
     mime_icon_replace = {
             "application-x-bzip2" : "gnome-mime-application-x-bzip",
+            "application-x-xz"    : "gnome-mime-application-x-bzip",
+            "text-x-diff"         : "text-plain",
+            "text-x-shellscript"  : "application-x-shellscript",
     }
     icon_name = None
     idx = p.rfind(".")
@@ -51,54 +54,54 @@ def make_file_obj(p, x, y):
         suffix = p[idx:]
         icon_name = suffix_icon_map.get(suffix, None)
     if not icon_name:
-        """
-        with os.popen("xdg-mime query filetype %s" % p) as f:
-            icon_name = f.read().strip().replace("/", "-")
-        """
-        with os.popen("file --mime-type %s" % p) as f:
-            name, mime = f.read().split(":")
-            icon_name = mime.strip().replace("/", "-")
+        with os.popen("file -b --mime-type %s" % p) as f:
+            mime = f.read().strip()
+            icon_name = mime.replace("/", "-")
             if mime_icon_replace.get(icon_name, None):
                 icon_name = mime_icon_replace.get(icon_name, None)
-    icon = "mimetypes/%d/%s.png" % (icon_size, icon_name)
+    icon = "mimetypes/scalable/%s.svg:%s" % (icon_name, icon_size)
     print("*FvwmPanelDir: (Icon '%s', Title '%s', Action (Mouse 1) Exec xdg-open '%s' )" % (icon, os.path.basename(p), os.path.abspath(p)))
 
 def make_folder_obj(p, x, y):
-    folder_icon_map = {
-            "music"     : "folder-music.png",
-            "Music"     : "folder-music.png",
-            "音乐"      : "folder-music.png",
-            "downloads" : "folder-downloads.png",
-            "Downloads" : "folder-downloads.png",
-            "下载"      : "folder-downloads.png",
-            "photos"    : "folder-pictures.png",
-            "Photos"    : "folder-pictures.png",
-            "照片"      : "folder-pictures.png",
-            "pictures"  : "folder-pictures.png",
-            "Pictures"  : "folder-pictures.png",
-            "图片"      : "folder-pictures.png",
-            "Documents" : "folder-documents.png",
-            "documents" : "folder-documents.png",
-            "文档"      : "folder-documents.png",
-            "Videos"    : "folder-videos.png",
-            "videos"    : "folder-videos.png",
-            "视频"      : "folder-videos.png",
-            "desktop"   : "user-desktop.png",
-            "Desktop"   : "user-desktop.png",
-            "桌面"      : "user-desktop.png",
+    folder_icons = {
+            "music"     : "folder-music.svg",
+            "Music"     : "folder-music.svg",
+            "音乐"      : "folder-music.svg",
+            "downloads" : "folder-downloads.svg",
+            "Downloads" : "folder-downloads.svg",
+            "下载"      : "folder-downloads.svg",
+            "photos"    : "folder-pictures.svg",
+            "Photos"    : "folder-pictures.svg",
+            "照片"      : "folder-pictures.svg",
+            "pictures"  : "folder-pictures.svg",
+            "Pictures"  : "folder-pictures.svg",
+            "图片"      : "folder-pictures.svg",
+            "Documents" : "folder-documents.svg",
+            "documents" : "folder-documents.svg",
+            "文档"      : "folder-documents.svg",
+            "Videos"    : "folder-videos.svg",
+            "videos"    : "folder-videos.svg",
+            "视频"      : "folder-videos.svg",
+            "desktop"   : "user-desktop.svg",
+            "Desktop"   : "user-desktop.svg",
+            "桌面"      : "user-desktop.svg",
     }
     basename = os.path.basename(p)
-    icon = folder_icon_map.get(basename, "folder.png")
+    icon = folder_icons.get(basename, "folder.svg")
     action_stub = "(Mouse 1) Function ShowFvwmPanelDir %s %d %d"
-    action = action_stub % (os.path.abspath(p), x, y)
-    print("*FvwmPanelDir: (Icon 'places/%d/%s', Title '%s', Action %s)" % (icon_size, icon, basename, action))
+    action = action_stub % (p, x, y)
+    print("*FvwmPanelDir: (Icon 'places/scalable/%s:%s', Title '%s', Action %s)" % (icon, icon_size, basename, action))
 
 def make_dir_panel(path, x=0, y=0):
-    objs = []
+    more2show = False
+    objs = [os.path.join(path, "..")]
     for p in os.listdir(path):
         if p.startswith("."):
             continue
-        objs.append(os.path.join(path,p))
+        objs.append(os.path.abspath(os.path.join(path,p)))
+    if len(objs) > 25:
+        objs = objs[:25]
+        more2show = True
     print(panel_settings)
     rows, columns = calculate_size(objs)
     print("*FvwmPanelDir: Rows %d" % rows)
@@ -111,7 +114,10 @@ def make_dir_panel(path, x=0, y=0):
             make_folder_obj(p, x, y)
         else:
             make_file_obj(p, x, y)
-    print("*FvwmPanelDir: (Icon 'emblems/scalable/emblem-symbolic-link.svg:%dx%d', title '打开文件夹...', Action (Mouse 1) Exec xdg-open '%s')" % (icon_size, icon_size, path))
+    if more2show:
+        print("*FvwmPanelDir: (Icon 'emblems/scalable/emblem-symbolic-link.svg:%s', Title '更多文件...', Action (Mouse 1) Exec xdg-open '%s')" % (icon_size, path))
+    else:
+        print("*FvwmPanelDir: (Icon 'emblems/scalable/emblem-symbolic-link.svg:%s', Title '打开文件夹', Action (Mouse 1) Exec xdg-open '%s')" % (icon_size, path))
 
 if __name__ == "__main__":
     make_dir_panel(sys.argv[1], int(sys.argv[2]), int(sys.argv[3]))
