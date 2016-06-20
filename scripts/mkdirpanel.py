@@ -48,6 +48,7 @@ def make_file_obj(p, x, y):
             "application-x-xz"    : "gnome-mime-application-x-bzip",
             "text-x-diff"         : "text-plain",
             "text-x-shellscript"  : "application-x-shellscript",
+            "application-x-iso9660-image"  : "application-x-cd-image",
     }
     icon_name = None
     idx = p.rfind(".")
@@ -55,7 +56,7 @@ def make_file_obj(p, x, y):
         suffix = p[idx:]
         icon_name = suffix_icon_map.get(suffix, None)
     if not icon_name:
-        with os.popen("file -b --mime-type %s" % p) as f:
+        with os.popen("file -b --mime-type '%s'" % p) as f:
             mime = f.read().strip()
             icon_name = mime.replace("/", "-")
             if mime_icon_replace.get(icon_name, None):
