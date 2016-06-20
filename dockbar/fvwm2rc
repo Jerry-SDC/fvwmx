@@ -95,7 +95,7 @@ AddToFunc InitDockBar
 + I *DockBar: Frame 0
 + I *DockBar: Rows 1
 + I *DockBar: Padding 0 0
-+ I *DockBar: Font "$[DEFFONT]"
++ I *DockBar: Font "$[FVWM_FONT_DEFAULT]"
 + I *DockBar: Colorset 10
 + I *DockBar: ActiveColorset 2
 + I *DockBar: PressColorset 2

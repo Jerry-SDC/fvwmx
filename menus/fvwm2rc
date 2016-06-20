@@ -12,7 +12,7 @@ MenuStyle * HilightBack
 MenuStyle * Hilight3DOff
 MenuStyle * ItemFormat " %i  %l%    %>  "
 MenuStyle * FlatSeparators
-MenuStyle * Font "$[DEFFONT]"
+MenuStyle * Font "$[FVWM_FONT_MENU]"
 CopyMenuStyle * AppMenuStyle
 
 DestroyFunc MakeBackgroundMenu

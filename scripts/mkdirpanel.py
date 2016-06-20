@@ -17,7 +17,7 @@ Style FvwmPanelDir RoundedCorners
 *FvwmPanelDir: BoxSize smart
 *FvwmPanelDir: Frame 0
 *FvwmPanelDir: Padding 5 8
-*FvwmPanelDir: Font "$[FVWM_BOLD_FONT]"
+*FvwmPanelDir: Font "$[FVWM_FONT_BOLD]"
 *FvwmPanelDir: Colorset 8
 *FvwmPanelDir: ActiveColorset 2
 *FvwmPanelDir: PressColorset 2
