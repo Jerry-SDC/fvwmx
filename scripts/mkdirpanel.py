@@ -39,7 +39,8 @@ def calculate_size(objs):
 def make_file_obj(p, x, y):
     suffix_icon_map = {
             ".xlsx" : "application-vnd.ms-excel",
-            ".py" : "text-x-python",
+            ".py"   : "text-x-python",
+            ".exe"  : "gnome-mime-application-x-ms-dos-executable",
     }
     mime_icon_replace = {
             "application-x-bzip2" : "gnome-mime-application-x-bzip",
