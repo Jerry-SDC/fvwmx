@@ -41,14 +41,24 @@ def make_file_obj(p, x, y):
             ".xlsx" : "application-vnd.ms-excel",
             ".py" : "text-x-python",
     }
+    mime_icon_replace = {
+            "application-x-bzip2" : "gnome-mime-application-x-bzip",
+    }
     icon_name = None
     idx = p.rfind(".")
     if idx != -1:
         suffix = p[idx:]
         icon_name = suffix_icon_map.get(suffix, None)
     if not icon_name:
+        """
         with os.popen("xdg-mime query filetype %s" % p) as f:
             icon_name = f.read().strip().replace("/", "-")
+        """
+        with os.popen("file --mime-type %s" % p) as f:
+            name, mime = f.read().split(":")
+            icon_name = mime.strip().replace("/", "-")
+            if mime_icon_replace.get(icon_name, None):
+                icon_name = mime_icon_replace.get(icon_name, None)
     icon = "mimetypes/%d/%s.png" % (icon_size, icon_name)
     print("*FvwmPanelDir: (Icon '%s', Title '%s', Action (Mouse 1) Exec xdg-open '%s' )" % (icon, os.path.basename(p), os.path.abspath(p)))
 
