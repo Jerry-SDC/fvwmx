@@ -43,7 +43,7 @@ Style FvwmPanelApp RoundedCorners
 def calculate_size(objs):
     rows = 1
     l = len(objs) + 1
-    for i in range(1, 9, 1):
+    for i in range(1, 11, 1):
         rows = i
         if (rows+1) ** 2 > l:
             break
@@ -101,7 +101,7 @@ def parse_desktop_file(path):
                     desktop_entry = False
             if not desktop_entry:
                 continue
-            if line.find("=") != -1:
+            if len(line.split("=")) == 2:
                 t, v = line.split("=")
                 entry[t] = v.strip()
     return entry
