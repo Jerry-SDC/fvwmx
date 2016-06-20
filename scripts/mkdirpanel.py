@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#-*- coding:utf-8
 
 import os
 import os.path
@@ -88,7 +89,7 @@ def make_folder_obj(p, x, y):
     }
     basename = os.path.basename(p)
     icon = folder_icons.get(basename, "folder.svg")
-    action_stub = "(Mouse 1) Function ShowFvwmPanelDir %s %d %d"
+    action_stub = "(Mouse 1) Function ShowFvwmPanelDir '%s' %d %d"
     action = action_stub % (p, x, y)
     print("*FvwmPanelDir: (Icon 'places/scalable/%s:%s', Title '%s', Action %s)" % (icon, icon_size, basename, action))
 
