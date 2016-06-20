@@ -33,7 +33,7 @@ Style FvwmPanelApp RoundedCorners
 *FvwmPanelApp: BoxSize smart
 *FvwmPanelApp: Frame 0
 *FvwmPanelApp: Padding 5 8
-*FvwmPanelApp: Font "$[FVWM_FONT_SMALL]"
+*FvwmPanelApp: Font "$[FVWM_FONT_APPGRID]"
 *FvwmPanelApp: Colorset 9
 *FvwmPanelApp: ActiveColorset 2
 *FvwmPanelApp: PressColorset 2
