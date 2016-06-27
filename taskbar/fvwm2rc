@@ -2,11 +2,12 @@ Style TaskBarAmy Sticky, !Title, !Handles, Borders, FixedPPosition, FixedSize
 Style TaskBarAmy WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,
 Style TaskBarAmy ParentalRelativity
 #Style TaskBar* StaysOnTop
+Style TaskBar* !RoundedCornersTop
 Style FvwmIconMan Sticky, !Title, !Handles, Borders, FixedPPosition, FixedSize
 Style FvwmIconMan WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,
 Style FvwmIconMan ParentalRelativity
 *FvwmIconMan: ManagerGeometry 2x1+0+0
-*FvwmIconMan: ButtonGeometry 128x24
+*FvwmIconMan: ButtonGeometry 128x26
 *FvwmIconMan: DrawIcons always
 *FvwmIconMan: Font $[FVWM_FONT_SMALL]
 *FvwmIconMan: MaxButtonWidth 200
@@ -25,8 +26,8 @@ Style FvwmIconMan ParentalRelativity
 *FvwmIconMan: FocusAndSelectColorset 2
 *FvwmIconMan: Action Mouse 0 N sendcommand Thumbnail
 
-*TaskBarAmy: Geometry $[vp.width]x24+0+0
-*TaskBarAmy: ButtonGeometry 1x24
+*TaskBarAmy: Geometry $[vp.width]x26+0+0
+*TaskBarAmy: ButtonGeometry 1x26
 *TaskBarAmy: BoxSize smart
 *TaskBarAmy: Frame 0
 *TaskBarAmy: Rows 1
@@ -36,10 +37,11 @@ Style FvwmIconMan ParentalRelativity
 *TaskBarAmy: ActiveColorset 2
 *TaskBarAmy: PressColorset 2
 *TaskBarAmy: (50x1, padding 0 0, Icon "Apple_logo_black.svg:20x20", Action (Mouse 1) Menu MenuFvwmRoot Root $leftp $bottomp+1p Nop)
-PipeRead 'printf "*TaskBarAmy: ($(($[vp.width]-50-100-120-26-26))x1, ActiveColorset 10, padding 0 0, swallow FvwmIconMan \'Module FvwmIconMan\')\n"'
-*TaskBarAmy: (100x1, Right, ActiveColorset 10, padding 0 0, swallow (NoClose, UseOld, Respawn) stalonetray "Exec stalonetray --no-shrink -p --icon-gravity=NE --grow-gravity=E -s 24 --icon-size 22 --scrollbars vertical")
-*TaskBarAmy: (120x1, ActiveColorset 10, id timer)
+PipeRead 'printf "*TaskBarAmy: ($(($[vp.width]-50-100-120-180-26-26))x1, ActiveColorset 10, padding 0 0, swallow FvwmIconMan \'Module FvwmIconMan\')\n"'
+*TaskBarAmy: (100x1, Right, ActiveColorset 10, padding 0 0, swallow (NoClose, UseOld, Respawn) stalonetray "Exec stalonetray --no-shrink -p --icon-gravity=NE --grow-gravity=E -s 26 --icon-size 22 --scrollbars vertical")
+*TaskBarAmy: (180x1, Padding 5 0, ActiveColorset 10, swallow (UseOld,NoClose,Respawn) ConkyDockbar "Exec conky -d -c ~/.fvwm/c.conf")
 *TaskBarAmy: (26x1, Icon "actions/22/view-list-details.png", Panel(down, delay 0, steps 16, position Button right 0 22) FvwmConky "Module FvwmButtons FvwmConky")
+*TaskBarAmy: (120x1, ActiveColorset 10, id timer)
 *TaskBarAmy: (26x1, padding 0 0, Icon "stock/22/avatar-default.png", Action (Mouse 1) Menu MenuLogout Root $leftp $bottomp+1p Nop)
 
 DestroyFunc StartTaskBarAmy

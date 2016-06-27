@@ -11,7 +11,7 @@ apps+=" adobe-source-han-sans-cn-fonts ttf-fira-mono ttf-fira-sans"
 apps+=" lxappearance"
 # Utilities
 apps+=" conky imagemagick stalonetray scrot"
-apps+=" surf st"
+apps+=" surf st dmenu"
 apps+=" fcitx-im"
 # Applet
 apps+=" volumeicon"
@@ -20,7 +20,7 @@ apps+=" volumeicon"
 if [ x$more_apps == x1 ]; then
     apps+=" base-devel git"
     apps+=" vim ctags"
-    apps+=" chromium"
+    apps+=" epiphany"
     apps+=" networkmanager network-manager-applet"
 fi
 
