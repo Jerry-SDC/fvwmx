@@ -48,13 +48,13 @@ AddToFunc StartFunction
 + I Read keys.fvwm2rc
 + I Schedule 10 EwmhBaseStruts 0 0 28 37
 + I Module FvwmEvent
++ I Module FvwmAnimate
 
 DestroyFunc InitFunction
 AddToFunc InitFunction
 + I Exec mkdir -p $[FVWM_TMPDIR] $[FVWM_CACHE_DIR]
 + I Function LoadLastBackground
 + I Exec xset b off
-+ I Exec xcompmgr &
 + I Exec volumeicon
-+ I Exec nm-applet
 + I Exec fcitx -d
++ I Exec nm-applet

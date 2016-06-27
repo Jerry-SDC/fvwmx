@@ -20,7 +20,6 @@ Style * BorderColorset 7
 Style * HilightBorderColorset 7
 
 # Icon Box settings
-#Style * NoIcon
 Style * IconBox -150 40 -1 -1, IconFill right right, IconGrid 140 50
 Style * IconTitleColorset 9
 Style * HilightIconTitleColorset 9
