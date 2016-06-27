@@ -46,7 +46,7 @@ AddToFunc StartFunction
 + I Read dockbar/fvwm2rc
 + I Read taskbar/fvwm2rc
 + I Read keys.fvwm2rc
-+ I Schedule 10 EwmhBaseStruts 0 0 28 37
++ I Schedule 10 EwmhBaseStruts 0 132 28 37
 + I Module FvwmEvent
 + I Module FvwmAnimate
 

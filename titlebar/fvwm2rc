@@ -61,8 +61,7 @@ AddToFunc MaximizeOrMove
 DestroyFunc Thumbnail
 AddToFunc Thumbnail
 + I Raise
-#+ I ThisWindow (!Shaded,Iconifiable,!Iconic) PipeRead 'import -frame -window $[w.id] png:/tmp/$[w.id] -resize 128 -quality 0 && echo Nop'
-+ I ThisWindow (!Shaded,Iconifiable,!Iconic) PipeRead 'xwd -silent -id $[w.id] | convert - -resize 128x64! png:/tmp/$[w.id] && echo Nop'
++ I ThisWindow (!Shaded,Iconifiable,!Iconic) PipeRead 'xwd -silent -id $[w.id] | convert - -scale 128x64! png:/tmp/$[w.id] && echo Nop'
 + I WindowStyle IconOverride, Icon /tmp/$[w.id]
 + I Iconify
 + I All (Iconic) PlaceAgain Icon
