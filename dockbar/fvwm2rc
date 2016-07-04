@@ -110,7 +110,7 @@ AddToFunc InitDockBar
 + I Function DockBarCreateAppItem leafpad leafpad
 + I Function DockBarCreateAppItem virtualbox virtualbox
 + I Function DockBarCreateAppItem chromium chrome
-+ I Function DockBarCreateAppItem "wine 'd:\\\\Notes\\notes.exe'" gnote
++ I Function DockBarCreateAppItem remmina remmina
 + I Function DockBarCreateAppItem "$[TERM]" xterm
 + I Function CreateFolderDock folder-home $[HOME]
 + I Function CreateFolderDock folder-download $[HOME]/Downloads

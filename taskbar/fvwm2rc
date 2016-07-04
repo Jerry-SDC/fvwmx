@@ -2,11 +2,16 @@
 #
 # FvwmIconMan
 #
+DestroyFunc TaskBarClick
+AddToFunc TaskBarClick
++ I ThisWindow (Raised) Thumbnail
++ I TestRc (NoMatch) DeThumbnail
+
 Style FvwmIconMan Sticky, !Title, !Handles, Borders, FixedPPosition, FixedSize
 Style FvwmIconMan WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,
 Style FvwmIconMan ParentalRelativity
 *FvwmIconMan: ManagerGeometry 2x1+0+0
-*FvwmIconMan: ButtonGeometry 128x27
+*FvwmIconMan: ButtonGeometry 128x26
 *FvwmIconMan: DrawIcons always
 *FvwmIconMan: Font $[FVWM_FONT_SMALL]
 *FvwmIconMan: MaxButtonWidth 200
@@ -23,7 +28,7 @@ Style FvwmIconMan ParentalRelativity
 *FvwmIconMan: SelectButton flat
 *FvwmIconMan: SelectColorset 2
 *FvwmIconMan: FocusAndSelectColorset 2
-*FvwmIconMan: Action Mouse 0 N sendcommand Thumbnail
+*FvwmIconMan: Action Mouse 0 N sendcommand TaskBarClick
 *FvwmIconMan: UseSkipList
 ####################################################
 
@@ -34,8 +39,8 @@ Style FvwmIconMan ParentalRelativity
 Style TaskBarAmy Sticky, !Title, !Handles, Borders, FixedPPosition, FixedSize
 Style TaskBarAmy WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,
 Style TaskBarAmy ParentalRelativity
-*TaskBarAmy: Geometry $[vp.width]x27+0+0
-*TaskBarAmy: ButtonGeometry 1x27
+*TaskBarAmy: Geometry $[vp.width]x26+0+0
+*TaskBarAmy: ButtonGeometry 1x26
 *TaskBarAmy: BoxSize smart
 *TaskBarAmy: Frame 0
 *TaskBarAmy: Rows 1
