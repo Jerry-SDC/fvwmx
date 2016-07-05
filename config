@@ -2,13 +2,13 @@
 # vim: ft=fvwm 
 #
 SetEnv FVWM_TMPDIR /tmp/fvwm/
-SetEnv FVWM_CACHE_DIR $[HOME]/.fvwm_cache/
+SetEnv FVWM_CACHE_DIR $[HOME]/.cache/fvwm/
 SetEnv FVWM_SCRIPTS $[FVWM_USERDIR]/scripts/
 SetEnv TERM xterm
 SetEnv FVWM_FONT_DEFAULT "xft:Source Han Sans CN Bold:size=9"
 SetEnv FVWM_FONT_BOLD "xft:Source Han Sans CN Bold:size=9.5"
 SetEnv FVWM_FONT_SMALL "xft:Source Han Sans CN:Bold:size=8.5"
-SetEnv FVWM_FONT_MENU "xft:Source Han Sans CN Normal:size=8.5"
+SetEnv FVWM_FONT_MENU "xft:Source Han Sans CN Normal:size=9"
 SetEnv FVWM_FONT_APPGRID "xft:Source Han Sans CN Bold:size=8"
 #SetEnv SOCKS_SERVER "127.0.0.1:1080"
 #SetEnv SOCKS_VERSION 5
@@ -48,7 +48,7 @@ AddToFunc StartFunction
 + I Read keys.fvwm2rc
 + I Schedule 10 EwmhBaseStruts 0 0 28 37
 + I Module FvwmEvent
-+ I Module FvwmAnimate
+#+ I Module FvwmAnimate
 
 DestroyFunc InitFunction
 AddToFunc InitFunction
@@ -58,4 +58,4 @@ AddToFunc InitFunction
 + I Exec volumeicon
 + I Exec fcitx -d
 + I Exec nm-applet
-+ I Exec syndaemon -k -d
++ I Exec syndaemon -k -d -i1

@@ -114,6 +114,7 @@ AddToFunc InitDockBar
 + I Function DockBarCreateAppItem "$[TERM]" xterm
 + I Function CreateFolderDock folder-home $[HOME]
 + I Function CreateFolderDock folder-download $[HOME]/Downloads
+#+ I *DockBar: (200x1, Padding 8 7, ActiveColorset 10, PressColorset 10, Action (Mouse 1) SendToModule TaskBarAmy PressButton monitor, Swallow (NoClose, UseOld, Respawn) ConkyDockbar "Exec conky -d -c $[FVWM_USERDIR]/taskbar/conky_taskbar.conf ")
 + I Read $[FVWM_USERDIR]/dockbar/pager/fvwm2rc
 
 DestroyFunc StartDocBar

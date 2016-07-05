@@ -32,19 +32,19 @@ AddToMenu MenuFvwmRoot
 + %apps/16/openterm.png%"打开命令行终端" Exec $[TERM]
 + %actions/16/window-close.png%"强制退出应用程序" Exec xkill
 + "" Nop
-+ %actions/16/mail-send-receive.png%"检查系统更新" Exec xterm -e "sudo pacman -Syu"
++ %actions/16/mail-send-receive.png%"系统更新" Exec xterm -e "sudo pacman -Syu --noconfirm"
 + %apps/16/paprefs.png%"外观设置" Exec lxappearance
 + %apps/16/preferences-desktop-wallpaper.png%"切换桌面背景" Popup MenuBackground
 + "" Nop
-+ %apps/16/gnome-log-out.png%"注销" Exec $[FVWM_SCRIPTS]/quit_verify.py
++ %apps/16/gnome-log-out.png%"注销" Quit
 
 DestroyMenu MenuLogout
 AddToMenu MenuLogout
 + "重启FVWM"%actions/22/system-log-out.png%   Restart
 + "注销"%actions/22/system-log-out.png%   Quit
 + "" Nop
-+ "重启计算机"%actions/22/system-restart-panel.png%   Exec $[FVWM_SCRIPTS]/quit_verify.py
-+ "关闭计算机"%actions/22/system-shutdown.png%   Exec $[FVWM_SCRIPTS]/quit_verify.py
++ "重启计算机"%actions/22/system-restart-panel.png%   Exec reboot
++ "关闭计算机"%actions/22/system-shutdown.png%   Exec poweroff
 
 DestroyMenu MenuBattery
 AddToMenu MenuBattery

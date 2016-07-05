@@ -1,14 +1,17 @@
 #!/usr/bin/env sh
 
-background_dir="${HOME}/Pictures/ ${HOME}/Downloads ${HOME}/.fvwm/background/"
-background_ext=".jpg .png .jpeg"
+bg_search_dirs="${HOME}/Pictures/ ${HOME}/Downloads ${HOME}/.fvwm/background/"
+bg_search_exts=".jpg .png .jpeg"
 
-for dir in ${background_dir}; do
-    for ext in ${background_ext}; do
+for dir in ${bg_search_dirs}; do
+    for ext in ${bg_search_exts}; do
         for f in `ls ${dir}/*${ext} 2> /dev/null`; do
-            bg_name=`basename ${f}`
-            convert ${f} -resize 96 -quality 0 png:/tmp/bgmenu_${bg_name} &> /dev/null;
-            echo -n + %/tmp/bgmenu_${bg_name}%\"${bg_name}\";
+            bgmenu_name=`basename ${f}`
+            bgmenu_icon="${FVWM_TMPDIR}/bgmenu_${bgmenu_name}"
+            if [ ! -f ${bgmenu_icon} ]; then
+                convert ${f} -resize 96 -quality 0 png:${bgmenu_icon} &> /dev/null;
+            fi;
+            echo -n + %${bgmenu_icon}%\"${bgmenu_name}\";
             echo -n " "
             echo "SetBackground ${f}"
             #echo '+ "" Nop'

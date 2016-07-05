@@ -1,30 +1,39 @@
 #!/usr/bin/env bash
 
-more_apps=1
+developement_tools=1
 
 apps=""
-# Basic Packages
-apps+=" xorg xorg-xinit xterm rxvt-unicode"
+# Xorg Packages
+apps+=" xorg xorg-xinit xterm"
+# Session Manager
+apps+=" lightdm lightdm-gtk-greeter"
 # Themes and Fonts
 apps+=" gnome-themes-standard faenza-icon-theme"
 apps+=" adobe-source-han-sans-cn-fonts ttf-fira-mono ttf-fira-sans"
-apps+=" lxappearance"
 # Utilities
 apps+=" conky imagemagick stalonetray scrot"
-apps+=" surf st dmenu"
-apps+=" fcitx-im"
 # Applet
+apps+=" fcitx-im"
 apps+=" volumeicon"
+apps+=" networkmanager network-manager-applet"
 
 # optional Apps
-if [ x$more_apps == x1 ]; then
+if [ x$developement_tools == x1 ]; then
     apps+=" base-devel git"
     apps+=" vim ctags"
-    apps+=" epiphany"
-    apps+=" networkmanager network-manager-applet"
 fi
 
+# Applications
+apps+=" gpicview"     # Picture/Photo View
+apps+=" nautilus"     # File Manager
+apps+=" epiphany"     # Browser
+apps+=" lxappearance" # Theme/Font configuration
+apps+=" surf st dmenu"
+
 sudo pacman -S --noconfirm --needed $apps
+
+sudo systemctl enable NetworkManager
+sudo systemctl enable lightdm
 
 XINITRC=${HOME}/.xinitrc
 echo export LANG=zh_CN.UTF-8 > ${XINITRC}
