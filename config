@@ -59,3 +59,4 @@ AddToFunc InitFunction
 + I Exec fcitx -d
 + I Exec nm-applet
 + I Exec syndaemon -k -d -i1
++ I Schedule 2000 Restart

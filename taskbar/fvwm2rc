@@ -50,7 +50,7 @@ Style TaskBarAmy ParentalRelativity
 *TaskBarAmy: ActiveColorset 2
 *TaskBarAmy: PressColorset 2
 *TaskBarAmy: (50x1, padding 0 0, Icon "Apple_logo_black.svg:20x20", Action (Mouse 1) Menu MenuFvwmRoot Root $leftp $bottomp+1p Nop)
-PipeRead 'printf "*TaskBarAmy: ($(($[vp.width]-50-100-200-105-1-26))x1, ActiveColorset 10, padding 0 0, swallow FvwmIconMan \'Module FvwmIconMan\')\n"'
+PipeRead 'printf "*TaskBarAmy: ($(($[vp.width]-50-100-200-120-1-26))x1, ActiveColorset 10, padding 0 0, swallow FvwmIconMan \'Module FvwmIconMan\')\n"'
 *TaskBarAmy: (100x1, ActiveColorset 10, padding 0 0, \
               Swallow (NoClose, UseOld, Respawn) stalonetray "Exec stalonetray --no-shrink -p --icon-gravity=NE --grow-gravity=E -s 26 --icon-size 22 --scrollbars vertical")
 #*TaskBarAmy: (26x1,  Padding 0 0, Id monitor, Icon "actions/22/view-list-details.png", Panel(down, delay 0, steps 16, position Button right 0 22) FvwmConky "Module FvwmButtons FvwmConky")
@@ -59,14 +59,15 @@ PipeRead 'printf "*TaskBarAmy: ($(($[vp.width]-50-100-200-105-1-26))x1, ActiveCo
               Action (Mouse 3) SendToModule TaskBarAmy PressButton monitor,\
               Swallow (NoClose, UseOld, Respawn) ConkyDockbar "Exec conky -d -c $[FVWM_USERDIR]/taskbar/conky_taskbar.conf")
 *TaskBarAmy: (1x1,  Padding 0 0, ActiveColorset 10, PressColorset 10, Id monitor, Panel(down, delay 0, steps 64, position Button right 0 10) FvwmConky "Module FvwmButtons FvwmConky")
-*TaskBarAmy: (105x1, Padding 0 0, ActiveColorset 10, id timer)
+#*TaskBarAmy: (105x1, Padding 0 0, ActiveColorset 10, id timer)
+*TaskBarAmy: (120x1, Padding 0 2, ActiveColorset 10, PressColorset 10,\
+              Swallow (NoClose, UseOld, Respawn) ConkyTimer "Exec conky -d -c $[FVWM_USERDIR]/taskbar/conky_timer.conf")
 *TaskBarAmy: (26x1,  Padding 0 0, Icon "stock/22/avatar-default.png", Action (Mouse 1) Menu MenuLogout Root $leftp $bottomp+1p Nop)
 
 DestroyFunc StartTaskBarAmy
 AddToFunc StartTaskBarAmy
 + I ModuleSynchronous FvwmButtons TaskBarAmy
-+ I Schedule Periodic 1000 Exec $[FVWM_USERDIR]/dockbar/timer/update_time.sh
-+ I Test (Init) Schedule 2000 All (TaskBarAmy) RefreshWindow
++ I Schedule 2000 All (TaskBarAmy) RefreshWindow
 
 StartTaskBarAmy
 
