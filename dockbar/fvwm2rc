@@ -100,16 +100,16 @@ AddToFunc InitDockBar
 + I *DockBar: ActiveColorset 2
 + I *DockBar: PressColorset 2
 + I Function DockBarCreateAppPanel start-here /usr/share/applications
-+ I Function DockBarCreateAppItem surf browser
++ I Function DockBarCreateAppItem epiphany browser
 + I Function DockBarCreateAppItem firefox firefox
 + I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'https://onedrive.live.com'" onedrive
-+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://twitter.com'" twitter
+#+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://twitter.com'" twitter
 + I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://mail.google.com'" gmail
 + I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://calendar.google.com'" gnome-calendar
-+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://drive.google.com'" google_driver
+#+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://drive.google.com'" google_driver
 + I Function DockBarCreateAppItem leafpad leafpad
 + I Function DockBarCreateAppItem virtualbox virtualbox
-+ I Function DockBarCreateAppItem chromium chrome
+#+ I Function DockBarCreateAppItem chromium chrome
 + I Function DockBarCreateAppItem remmina remmina
 + I Function DockBarCreateAppItem "$[TERM]" xterm
 + I Function CreateFolderDock folder-home $[HOME]

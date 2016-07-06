@@ -36,6 +36,16 @@ Style FvwmIconMan ParentalRelativity
 #
 # TaskBar
 #
+DestroyFunc StartSysConky
+AddToFunc StartSysConky
++ I None (ConkyDockbar) Exec conky -d -c $[FVWM_USERDIR]/taskbar/conky_taskbar.conf
++ I Wait ConkyDockbar
+
+DestroyFunc StartConkyTimer
+AddToFunc StartConkyTimer
++ I None (ConkyTimer) Exec conky -d -c $[FVWM_USERDIR]/taskbar/conky_timer.conf
++ I Wait ConkyTimer
+
 Style TaskBarAmy Sticky, !Title, !Handles, Borders, FixedPPosition, FixedSize
 Style TaskBarAmy WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,
 Style TaskBarAmy ParentalRelativity
@@ -57,17 +67,17 @@ PipeRead 'printf "*TaskBarAmy: ($(($[vp.width]-50-100-200-120-1-26))x1, ActiveCo
 *TaskBarAmy: (200x1, Padding 5 0, ActiveColorset 10, PressColorset 10,\
               Action (Mouse 1) Exec gnome-system-monitor || $[TERM] -e "top",\
               Action (Mouse 3) SendToModule TaskBarAmy PressButton monitor,\
-              Swallow (NoClose, UseOld, Respawn) ConkyDockbar "Exec conky -d -c $[FVWM_USERDIR]/taskbar/conky_taskbar.conf")
-*TaskBarAmy: (1x1,  Padding 0 0, ActiveColorset 10, PressColorset 10, Id monitor, Panel(down, delay 0, steps 64, position Button right 0 10) FvwmConky "Module FvwmButtons FvwmConky")
+              Swallow (NoClose, UseOld, Respawn) ConkyDockbar StartSysConky)
+#*TaskBarAmy: (1x1,  Padding 0 0, ActiveColorset 10, PressColorset 10, Id monitor, Panel(down, delay 0, steps 64, position Button right 0 10) FvwmConky "Module FvwmButtons FvwmConky")
 #*TaskBarAmy: (105x1, Padding 0 0, ActiveColorset 10, id timer)
 *TaskBarAmy: (120x1, Padding 0 2, ActiveColorset 10, PressColorset 10,\
-              Swallow (NoClose, UseOld, Respawn) ConkyTimer "Exec conky -d -c $[FVWM_USERDIR]/taskbar/conky_timer.conf")
+              Swallow (NoClose, UseOld, Respawn) ConkyTimer StartConkyTimer)
 *TaskBarAmy: (26x1,  Padding 0 0, Icon "stock/22/avatar-default.png", Action (Mouse 1) Menu MenuLogout Root $leftp $bottomp+1p Nop)
 
 DestroyFunc StartTaskBarAmy
 AddToFunc StartTaskBarAmy
 + I ModuleSynchronous FvwmButtons TaskBarAmy
-+ I Schedule 2000 All (TaskBarAmy) RefreshWindow
+#+ I Schedule 2000 All (TaskBarAmy) RefreshWindow
 
 StartTaskBarAmy
 
@@ -82,4 +92,4 @@ Style FvwmConky WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,
 *FvwmConky: Colorset 10
 *FvwmConky: ActiveColorset 10
 *FvwmConky: PressColorset 10
-*FvwmConky: (1x1, ActiveColorset 10, padding 5 5, swallow (UseOld,NoClose,Respawn) Conky "Exec conky -d -c $[FVWM_USERDIR]/taskbar/conky_dropdown.conf")
+*FvwmConky: (1x1, ActiveColorset 10, padding 5 5, swallow (UseOld,NoClose,Respawn) Conky "Exec exec conky -c $[FVWM_USERDIR]/taskbar/conky_dropdown.conf")

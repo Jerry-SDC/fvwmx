@@ -25,19 +25,25 @@ ImagePath $[FVWM_USERDIR]/icons/:+
 
 DestroyFunc SetBackground
 AddToFunc SetBackground
-+ I Test (f $0) Exec \
-        convert $0 -resize $[vp.width]x$[vp.height]\! png:$[FVWM_CACHE_DIR]/wallpaper &&\
-        fvwm-root -r $[FVWM_CACHE_DIR]/wallpaper
++ I Test (f $0) PipeRead "convert $0 -resize $[vp.width]x$[vp.height]\! png:$[FVWM_CACHE_DIR]/wallpaper && fvwm-root -r $[FVWM_CACHE_DIR]/wallpaper; echo Nop"
 
 DestroyFunc LoadLastBackground
 AddToFunc LoadLastBackground
-+ I Test (f $[FVWM_CACHE_DIR]/wallpaper) \
-        Exec fvwm-root -r $[FVWM_CACHE_DIR]/wallpaper
-+ I TestRc (NoMatch) SetBackground "$[FVWM_USERDIR]/background/default.jpg"
++ I Test (f $[FVWM_CACHE_DIR]/wallpaper) PipeRead "fvwm-root -r $[FVWM_CACHE_DIR]/wallpaper; echo Nop"
++ I TestRc (NoMatch) SetBackground $[FVWM_USERDIR]/background/default.jpg
+
+DestroyFunc AutoStartApps
+AddToFunc AutoStartApps
++ I Exec xset b off
++ I Exec volumeicon &
++ I Exec fcitx -d
++ I Exec nm-applet &
++ I Exec syndaemon -k -d -i1
 
 DestroyFunc StartFunction
 AddToFunc StartFunction
 + I Module FvwmCommandS
++ I Module FvwmEvent
 + I Exec xrdb -load $[FVWM_USERDIR]/Xresources
 + I Read colorset.fvwm2rc
 + I Read desktop.fvwm2rc
@@ -47,16 +53,10 @@ AddToFunc StartFunction
 + I Read taskbar/fvwm2rc
 + I Read keys.fvwm2rc
 + I Schedule 10 EwmhBaseStruts 0 0 28 37
-+ I Module FvwmEvent
-#+ I Module FvwmAnimate
++ I Test (Init) Schedule 1000 Restart
 
 DestroyFunc InitFunction
 AddToFunc InitFunction
-+ I Exec mkdir -p $[FVWM_TMPDIR] $[FVWM_CACHE_DIR]
++ I PipeRead "mkdir -p $[FVWM_TMPDIR] $[FVWM_CACHE_DIR]; echo Nop"
 + I Function LoadLastBackground
-+ I Exec xset b off
-+ I Exec volumeicon
-+ I Exec fcitx -d
-+ I Exec nm-applet
-+ I Exec syndaemon -k -d -i1
-+ I Schedule 2000 Restart
++ I Function AutoStartApps
