@@ -84,6 +84,9 @@ DestroyFunc DockBarCreateAppPanel
 AddToFunc DockBarCreateAppPanel
 + I *DockBar: (40x1, Icon places/32/$0.png, PressIcon places/16/$0.png, \
                Action (Mouse 1) ToggleFvwmPanelApp "$1" $left $top)
+DestroyFunc DockBarSeparator
+AddToFunc DockBarSeparator
++ I *DockBar: (3x1, ActiveColorset 10, Icon vline.svg:3x32)
 
 #
 # Create DockBar
@@ -100,21 +103,23 @@ AddToFunc InitDockBar
 + I *DockBar: ActiveColorset 2
 + I *DockBar: PressColorset 2
 + I Function DockBarCreateAppPanel start-here /usr/share/applications
++ I Function DockBarSeparator
 + I Function DockBarCreateAppItem epiphany browser
 + I Function DockBarCreateAppItem firefox firefox
-+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'https://onedrive.live.com'" onedrive
-#+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://twitter.com'" twitter
-+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://mail.google.com'" gmail
-+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://calendar.google.com'" gnome-calendar
-#+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' surf 'http://drive.google.com'" google_driver
++ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' luakit 'https://onedrive.live.com'" onedrive
++ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' luakit 'http://twitter.com'" twitter
++ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' luakit 'http://mail.google.com'" gmail
++ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' luakit 'http://calendar.google.com'" gnome-calendar
+#+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' luakit 'http://drive.google.com'" google_driver
 + I Function DockBarCreateAppItem leafpad leafpad
 + I Function DockBarCreateAppItem virtualbox virtualbox
 #+ I Function DockBarCreateAppItem chromium chrome
 + I Function DockBarCreateAppItem remmina remmina
 + I Function DockBarCreateAppItem "$[TERM]" xterm
++ I Function DockBarSeparator
 + I Function CreateFolderDock folder-home $[HOME]
 + I Function CreateFolderDock folder-download $[HOME]/Downloads
-#+ I *DockBar: (200x1, Padding 8 7, ActiveColorset 10, PressColorset 10, Action (Mouse 1) SendToModule TaskBarAmy PressButton monitor, Swallow (NoClose, UseOld, Respawn) ConkyDockbar "Exec conky -d -c $[FVWM_USERDIR]/taskbar/conky_taskbar.conf ")
++ I Function DockBarSeparator
 + I Read $[FVWM_USERDIR]/dockbar/pager/fvwm2rc
 
 DestroyFunc StartDocBar

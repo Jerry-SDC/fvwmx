@@ -85,8 +85,8 @@ def make_app_obj(app, x, y):
     #
     # get app action
     #
-    command = app.get("Exec", "Nop").replace("%U", "")
-    action = "(Mouse 1) Exec %s" % command
+    command = app.get("Exec", "Nop").split()
+    action = "(Mouse 1) Exec %s" % command[0]
     print("*FvwmPanelApp: (icon '%s', title '%s', action %s)" % (icon, name, action))
 
 def parse_desktop_file(path):
