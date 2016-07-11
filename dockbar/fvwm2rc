@@ -98,7 +98,7 @@ AddToFunc InitDockBar
 + I *DockBar: Frame 0
 + I *DockBar: Rows 1
 + I *DockBar: Padding 0 0
-+ I *DockBar: Font "$[FVWM_FONT_DEFAULT]"
++ I *DockBar: Font $[infostore.font_default]
 + I *DockBar: Colorset 10
 + I *DockBar: ActiveColorset 2
 + I *DockBar: PressColorset 2
@@ -115,10 +115,11 @@ AddToFunc InitDockBar
 + I Function DockBarCreateAppItem virtualbox virtualbox
 #+ I Function DockBarCreateAppItem chromium chrome
 + I Function DockBarCreateAppItem remmina remmina
-+ I Function DockBarCreateAppItem "$[TERM]" xterm
++ I Function DockBarCreateAppItem "$[infostore.app_terminal]" terminal
 + I Function DockBarSeparator
 + I Function CreateFolderDock folder-home $[HOME]
 + I Function CreateFolderDock folder-download $[HOME]/Downloads
++ I Function CreateFolderDock user-trash $[HOME]/.local/share/Trash/files
 + I Function DockBarSeparator
 + I Read $[FVWM_USERDIR]/dockbar/pager/fvwm2rc
 

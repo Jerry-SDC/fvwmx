@@ -18,6 +18,26 @@ xterm*color13:#AD7FA8
 xterm*color14:#34E2E2
 xterm*color15:#EEEEEC
 
+FvwmConsole*faceName:fira Mono Medium:size=9
+FvwmConsole*faceNameDoublesize:Source Han Sans CN Medium:size=10
+FvwmConsole*background:#E7E8EB
+FvwmConsole*color0:#000000
+FvwmConsole*color1:#CC0000
+FvwmConsole*color2:#4E9A06
+FvwmConsole*color3:#C4A000
+FvwmConsole*color4:#3465A4
+FvwmConsole*color5:#75507B
+FvwmConsole*color6:#06989A
+FvwmConsole*color7:#D3D7CF
+FvwmConsole*color8:#555753
+FvwmConsole*color9:#EF2929
+FvwmConsole*color10:#8AE234
+FvwmConsole*color11:#FCE94F
+FvwmConsole*color12:#739FCF
+FvwmConsole*color13:#AD7FA8
+FvwmConsole*color14:#34E2E2
+FvwmConsole*color15:#EEEEEC
+
 Rxvt.font:xft:Fira Mono Medium:size=9,xft:Source Han Sans CN Medium:size=10
 !Rxvt.fading:80
 Rxvt.scrollBar:False

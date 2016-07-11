@@ -54,7 +54,7 @@ AddToFunc InitDockBar
 + I *DockBar: Colorset 11
 + I *DockBar: ActiveColorset 2
 + I *DockBar: PressColorset 2
-+ I Function CreateAppDock $[TERM] xterm
++ I Function CreateAppDock $[infostore.app_terminal] xterm
 + I Function CreateAppDock chromium
 + I Function CreateAppDock mousepad gedit
 + I Function CreateAppDock pcmanfm system-file-manager
