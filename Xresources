@@ -1,3 +1,11 @@
+Xft.autohint:1
+!Xft.lcdfilter:lcddefault
+Xft.hintstyle:hintslight
+Xft.hinting:1
+Xft.antialias:1
+Xft.dpi:96
+Xft.rgba:none
+
 xterm*faceName:fira Mono Medium:size=9
 xterm*faceNameDoublesize:Source Han Sans CN Medium:size=10
 xterm*background:#E7E8EB
@@ -41,5 +49,3 @@ Rxvt.color12:#739FCF
 Rxvt.color13:#AD7FA8
 Rxvt.color14:#34E2E2
 Rxvt.color15:#EEEEEC
-
-Xft.dpi:96

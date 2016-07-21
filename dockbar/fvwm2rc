@@ -84,6 +84,7 @@ DestroyFunc DockBarCreateAppPanel
 AddToFunc DockBarCreateAppPanel
 + I *DockBar: (40x1, Icon places/32/$0.png, PressIcon places/16/$0.png, \
                Action (Mouse 1) ToggleFvwmPanelApp "$1" $left $top)
+
 DestroyFunc DockBarSeparator
 AddToFunc DockBarSeparator
 + I *DockBar: (3x1, ActiveColorset 10, Icon vline.svg:3x32)
@@ -119,6 +120,7 @@ AddToFunc InitDockBar
 + I Function DockBarSeparator
 + I Function CreateFolderDock folder-home $[HOME]
 + I Function CreateFolderDock folder-download $[HOME]/Downloads
++ I Function CreateFolderDock user-trash $[HOME]/.local/share/Trash/files
 + I Function DockBarSeparator
 + I Read $[FVWM_USERDIR]/dockbar/pager/fvwm2rc
 
