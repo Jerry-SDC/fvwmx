@@ -12,7 +12,7 @@ MenuStyle * HilightBack
 MenuStyle * Hilight3DOff
 MenuStyle * ItemFormat " %i  %l%    %>  "
 MenuStyle * FlatSeparators
-MenuStyle * Font "$[FVWM_FONT_MENU]"
+MenuStyle * Font "$[infostore.font_menu]"
 CopyMenuStyle * AppMenuStyle
 
 DestroyFunc MakeBackgroundMenu
@@ -29,7 +29,7 @@ AddToMenu MenuFvwmRoot
 + DynamicPopDownAction DestroyMenu MenuBackground
 + MissingSubMenuFunction MakeBackgroundMenu
 + %apps/16/openterm.png%"Open FvwmConsole" FvwmConsole
-+ %apps/16/openterm.png%"打开命令行终端" Exec $[TERM]
++ %apps/16/openterm.png%"打开命令行终端" $[infostore.app_terminal]
 + %actions/16/window-close.png%"强制退出应用程序" Exec xkill
 + "" Nop
 + %actions/16/mail-send-receive.png%"系统更新" Exec xterm -e "sudo pacman -Syu --noconfirm"
