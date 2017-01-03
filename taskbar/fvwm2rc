@@ -28,7 +28,7 @@ Style FvwmIconMan ParentalRelativity
 *FvwmIconMan: SelectButton flat
 *FvwmIconMan: SelectColorset 2
 *FvwmIconMan: FocusAndSelectColorset 2
-*FvwmIconMan: Action Mouse 0 N sendcommand TaskBarClick
+#*FvwmIconMan: Action Mouse 0 N sendcommand TaskBarClick
 *FvwmIconMan: UseSkipList
 ####################################################
 
@@ -46,39 +46,39 @@ AddToFunc StartConkyTimer
 + I None (ConkyTimer) Exec $[FVWM_SCRIPTS]/startconky.sh $[FVWM_USERDIR]/taskbar/conky_timer.conf
 + I Wait ConkyTimer
 
-Style TaskBarAmy Sticky, !Title, !Handles, Borders, FixedPPosition, FixedSize
-Style TaskBarAmy WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,
-Style TaskBarAmy ParentalRelativity
-*TaskBarAmy: Geometry $[vp.width]x26+0+0
-*TaskBarAmy: ButtonGeometry 1x26
-*TaskBarAmy: BoxSize smart
-*TaskBarAmy: Frame 0
-*TaskBarAmy: Rows 1
-*TaskBarAmy: Padding 0 0
-*TaskBarAmy: Font "$[infostore.font_taskbar]"
-*TaskBarAmy: Colorset 10
-*TaskBarAmy: ActiveColorset 2
-*TaskBarAmy: PressColorset 2
-*TaskBarAmy: (50x1, padding 0 0, Icon "Apple_logo_black.svg:20x20", Action (Mouse 1) Menu MenuFvwmRoot Root $leftp $bottomp+1p Nop)
-PipeRead 'printf "*TaskBarAmy: ($(($[vp.width]-50-100-200-120-1-26))x1, ActiveColorset 10, padding 0 0, swallow FvwmIconMan \'Module FvwmIconMan\')\n"'
-*TaskBarAmy: (100x1, ActiveColorset 10, padding 0 0, \
+Style TaskBarPrimary Sticky, !Title, !Handles, Borders, FixedPPosition, FixedSize
+Style TaskBarPrimary WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,
+Style TaskBarPrimary ParentalRelativity
+*TaskBarPrimary: Geometry $[vp.width]x26+0+0
+*TaskBarPrimary: ButtonGeometry 1x26
+*TaskBarPrimary: BoxSize smart
+*TaskBarPrimary: Frame 0
+*TaskBarPrimary: Rows 1
+*TaskBarPrimary: Padding 0 0
+*TaskBarPrimary: Font "$[infostore.font_taskbar]"
+*TaskBarPrimary: Colorset 10
+*TaskBarPrimary: ActiveColorset 2
+*TaskBarPrimary: PressColorset 2
+*TaskBarPrimary: (50x1, padding 0 0, Icon "Apple_logo_black.svg:20x20", Action (Mouse 1) Menu MenuFvwmRoot Root $leftp $bottomp+1p Nop)
+PipeRead 'printf "*TaskBarPrimary: ($(($[vp.width]-50-100-200-120-1-26))x1, ActiveColorset 10, padding 0 0, swallow FvwmIconMan \'Module FvwmIconMan\')\n"'
+*TaskBarPrimary: (100x1, ActiveColorset 10, padding 0 0, \
               Swallow (NoClose, UseOld, Respawn) stalonetray "Exec stalonetray --no-shrink -p --icon-gravity=NE --grow-gravity=E -s 26 --icon-size 22 --scrollbars vertical")
-#*TaskBarAmy: (26x1,  Padding 0 0, Id monitor, Icon "actions/22/view-list-details.png", Panel(down, delay 0, steps 16, position Button right 0 22) FvwmConky "Module FvwmButtons FvwmConky")
-*TaskBarAmy: (200x1, Padding 5 0, ActiveColorset 10, PressColorset 10,\
-              Action (Mouse 1) SendToModule TaskBarAmy PressButton monitor,\
+#*TaskBarPrimary: (26x1,  Padding 0 0, Id monitor, Icon "actions/22/view-list-details.png", Panel(down, delay 0, steps 16, position Button right 0 22) FvwmConky "Module FvwmButtons FvwmConky")
+*TaskBarPrimary: (200x1, Padding 5 0, ActiveColorset 10, PressColorset 10,\
+              Action (Mouse 1) SendToModule TaskBarPrimary PressButton monitor,\
               Action (Mouse 3) Exec gnome-system-monitor || $[infostore.app_terminal] -e "top",\
               Swallow (NoClose, UseOld, Respawn) ConkyDockbar StartSysConky)
-*TaskBarAmy: (1x1,  Padding 0 0, ActiveColorset 10, PressColorset 10, Id monitor, Panel(down, delay 0, steps 64, position Button right 0 10) FvwmConky "Module FvwmButtons FvwmConky")
-#*TaskBarAmy: (105x1, Padding 0 0, ActiveColorset 10, id timer)
-*TaskBarAmy: (120x1, Padding 0 2, ActiveColorset 10, PressColorset 10,\
+*TaskBarPrimary: (1x1,  Padding 0 0, ActiveColorset 10, PressColorset 10, Id monitor, Panel(down, delay 0, steps 64, position Button right 0 10) FvwmConky "Module FvwmButtons FvwmConky")
+#*TaskBarPrimary: (105x1, Padding 0 0, ActiveColorset 10, id timer)
+*TaskBarPrimary: (120x1, Padding 0 2, ActiveColorset 10, PressColorset 10,\
               Swallow (NoClose, UseOld, Respawn) ConkyTimer StartConkyTimer)
-*TaskBarAmy: (26x1,  Padding 0 0, Icon "stock/22/avatar-default.png", Action (Mouse 1) Menu MenuLogout Root $leftp $bottomp+1p Nop)
+*TaskBarPrimary: (26x1,  Padding 0 0, Icon "stock/22/avatar-default.png", Action (Mouse 1) Menu MenuLogout Root $leftp $bottomp+1p Nop)
 
-DestroyFunc StartTaskBarAmy
-AddToFunc StartTaskBarAmy
-+ I ModuleSynchronous FvwmButtons TaskBarAmy
+DestroyFunc StartTaskBarPrimary
+AddToFunc StartTaskBarPrimary
++ I ModuleSynchronous FvwmButtons TaskBarPrimary
 
-StartTaskBarAmy
+StartTaskBarPrimary
 
 Style FvwmConky !title, !Handles
 Style FvwmConky WindowListSkip, CirculateSkip, !Iconifiable, NeverFocus,

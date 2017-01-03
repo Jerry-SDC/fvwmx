@@ -1,5 +1,5 @@
 Emulate Win
-DesktopSize 4x1
+DesktopSize 5x1
 EdgeScroll  0 0
 EdgeThickness 0
 
@@ -11,7 +11,7 @@ OpaqueMoveSize unlimited
 Style * TileCascadePlacement
 Style * DecorateTransient
 Style * EWMHUseStackingOrderHints
-#Style * EWMHMaximizeIgnoreWorkingArea
+Style * EWMHMaximizeIgnoreWorkingArea
 Style * EWMHUseStateHints
 Style * EWMHUseStrutHints
 Style * HandleWidth 1
@@ -22,6 +22,8 @@ Style * MouseFocusClickRaises
 #Style * PositionPlacement Center
 #
 Style * EWMHUseStackingOrderHints
+Style * MWMFunctions,MWMDecor,MWMButtons,HintOverride
+Style * NoPPosition
 
 Style * BorderColorset 7
 Style * HilightBorderColorset 7
@@ -35,6 +37,8 @@ Style * IconBackgroundRelief 0
 
 Style "Cloud Music"  !Title,!Borders
 Style "netease-cloud-music"  !Title
+Style "epiphany"  !Title
+Style "nautilus"  !Title
 
 #Style plank !Title, !Borders
 #Style plank HandleWidth 0

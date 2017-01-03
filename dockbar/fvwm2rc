@@ -107,11 +107,11 @@ AddToFunc InitDockBar
 + I Function DockBarSeparator
 + I Function DockBarCreateAppItem epiphany browser
 + I Function DockBarCreateAppItem firefox firefox
-+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' luakit 'https://onedrive.live.com'" onedrive
-+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' luakit 'http://twitter.com'" twitter
-+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' luakit 'http://mail.google.com'" gmail
-+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' luakit 'http://calendar.google.com'" gnome-calendar
-#+ I Function DockBarCreateAppItem "http_proxy='socks5://127.0.0.1:1080' luakit 'http://drive.google.com'" google_driver
++ I Function DockBarCreateAppItem "proxychains epiphany 'https://onedrive.live.com'" onedrive
++ I Function DockBarCreateAppItem "proxychains epiphany 'http://twitter.com'" twitter
++ I Function DockBarCreateAppItem "proxychains epiphany 'http://mail.google.com'" gmail
++ I Function DockBarCreateAppItem "proxychains epiphany 'http://calendar.google.com'" gnome-calendar
++ I Function DockBarCreateAppItem "proxychains epiphany 'http://drive.google.com'" google_driver
 + I Function DockBarCreateAppItem leafpad leafpad
 + I Function DockBarCreateAppItem virtualbox virtualbox
 #+ I Function DockBarCreateAppItem chromium chrome

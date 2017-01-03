@@ -77,8 +77,10 @@ AddToFunc DeThumbnail
 Mouse 1 1 A Menu MenuFvwmWindowOps Nop
 Mouse 1 2 A Close
 Mouse 1 4 A Maximize 100 100
-Mouse 1 6 A Function Thumbnail
-Mouse 1 I A Function DeThumbnail
+#Mouse 1 6 A Function Thumbnail
+#Mouse 1 I A Function DeThumbnail
+Mouse 1 6 A Iconify
+Mouse 1 I A Iconify off
 Mouse 3 I A Close
 
 Mouse 3 T A Menu MenuFvwmWindowOps Nop

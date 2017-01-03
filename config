@@ -39,6 +39,8 @@ AddToFunc AutoStartApps
 + I Exec fcitx -d
 + I Exec nm-applet &
 + I Exec syndaemon -k -d -i1
++ I Exec $[FVWM_SCRIPTS]/touchpad.sh
++ I Exec xcompmgr &
 
 DestroyFunc StartFunction
 AddToFunc StartFunction
